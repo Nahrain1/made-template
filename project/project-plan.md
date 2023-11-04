@@ -13,7 +13,7 @@ Addressing the relationship between early school leaving and the unemployment ra
 Metadata URL: https://data.europa.eu/data/datasets?locale=de  
 Data URL: https://data.europa.eu/data/datasets/30303031-3332-4031-312d-303030390000?locale=de  
 Data Type: CSV Data  
-Official statistics, sourced from a CSV file provided by the Statisches Bundesamt, present data on unemployment figures categorized by federal states and gender within the period spanning from 1991 to 2022. 
+Official statistics, sourced from a CSV file provided by the Statistisches Bundesamt, present data on unemployment figures categorized by federal states and gender within the period spanning from 1991 to 2022. 
 
 ## **Data source 2:**  
 ### **Data source 2.1: Early school leavers by federal state**  
