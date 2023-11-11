@@ -22,7 +22,7 @@ table = sa.Table("airports", meta,
 meta.drop_all(bind=engine)
 meta.create_all(bind=engine)
 url = "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv" 
-pd.options.display.max_columns = None
+#pd.options.display.max_columns = None
 df = pd.read_csv(url, delimiter=';')
 df.to_sql(name='airports', con=engine, if_exists="replace")
 
