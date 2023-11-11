@@ -1,11 +1,9 @@
+from sqlalchemy import create_engine
 import pandas as pd
-from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
 import sqlalchemy as sa
 
-# Define the SQLite database engine
-engine = create_engine("sqlite:///airports.sqlite", echo=True)
+engine = create_engine("sqlite:///airports.sqlite")
 meta = sa.MetaData()
-
 table = sa.Table("airports", meta, 
                 sa.Column("column_1", sa.Integer),
                 sa.Column("column_2", sa.String),
@@ -23,13 +21,8 @@ table = sa.Table("airports", meta,
                  )
 meta.drop_all(bind=engine)
 meta.create_all(bind=engine)
-# url
 url = "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv" 
-
 pd.options.display.max_columns = None
-
 df = pd.read_csv(url, delimiter=';')
-
-# append to table 
 df.to_sql(name='airports', con=engine, if_exists="replace")
 
