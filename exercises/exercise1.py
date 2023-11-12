@@ -18,11 +18,10 @@ table = sa.Table("airports", meta,
                 sa.Column('column_11', sa.String),
                 sa.Column('column_12', sa.String),
                 sa.Column('geo_punkt', sa.String)
-                 )
+                )
 meta.drop_all(bind=engine)
 meta.create_all(bind=engine)
 url = "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv" 
-#pd.options.display.max_columns = None
 df = pd.read_csv(url, delimiter=';')
-df.to_sql(name='airports', con=engine, if_exists="replace")
+df.to_sql(name='airports', con=engine, if_exists="replace", index=False)
 
