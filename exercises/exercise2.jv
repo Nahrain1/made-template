@@ -56,7 +56,7 @@ block TrainstopsTableInterpreter oftype TableInterpreter{
         "Laenge" oftype Laenge,
         "Breite" oftype Breite,
         "Betreiber_Name" oftype text,
-        "Beteriber_Nr" oftype integer
+        "Betreiber_Nr" oftype integer
     ];
 }
 block TrainstopsLoader oftype SQLiteLoader{
@@ -64,4 +64,3 @@ block TrainstopsLoader oftype SQLiteLoader{
     file: "./trainstops.sqlite";
 }
 }
-
