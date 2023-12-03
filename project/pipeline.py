@@ -1,66 +1,42 @@
-import requests
-import csv
-from io import StringIO
 from sqlalchemy import create_engine
 import pandas as pd
 import sqlalchemy as sa
 import os
 
-""""""""""""""""""""" CREATE DATABASE 1  """""""""""""""""
+def clean_dataset(url, n):
 
-url = "https://www.datenportal.bmbf.de/portal/Tabelle-0.64.csv"
-response = requests.get(url)
-if response.status_code == 200:
-    
-    db_path1 = os.path.join("C://Users//nahra//OneDrive//Desktop//Master//made-template//data","table1.sqlite")
-    engine = create_engine(f"sqlite:///{db_path1}")
-
+    database_path = os.path.join("C://Users//nahra//OneDrive//Desktop//Master//made-template//data",f"table{n}.sqlite")
+    engine = create_engine(f"sqlite:///{database_path}")
     meta = sa.MetaData()
-    """table = sa.Table("table1", meta,
-                  sa.Column("2005", sa.String),
-                  sa.Column("2006", sa.String),
-                  sa.Column("2007", sa.String),
-                  sa.Column("2008", sa.String),
-                  sa.Column("2009", sa.String),
-                  sa.Column("2010", sa.String),
-                  sa.Column("2011", sa.String),
-                  sa.Column("2012", sa.String),
-                  sa.Column("2013", sa.String),
-                  sa.Column("2014", sa.String),
-                  sa.Column("2015", sa.String),
-                  sa.Column("2016", sa.String),
-                  sa.Column("2017", sa.String),
-                  sa.Column("2018", sa.String),
-                  sa.Column("2019", sa.String),
-                  sa.Column("2020", sa.String),
-                  sa.Column("2021", sa.String),
-                  sa.Column("2022", sa.String)
-                  )"""
     meta.drop_all(bind=engine)
     meta.create_all(bind=engine)
       
-    df = pd.read_csv(url, delimiter=';',skiprows=range(1, 5), nrows=18)
-    # Set column names
-    df.columns = ["year","2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014",
-                  "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"]
+    if n == 1: 
+        df = pd.read_csv(url, delimiter=';',skiprows=range(1, 5), nrows=18)
+        # Set column names
+        df.columns = ["year","2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014",
+                    "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"]
+        replacements = {'c': '', '(': '', ')': ''}
+        df = df.replace(to_replace=replacements)
+        df = df.replace(to_replace=r'\((\d+)\)', value=r'\1', regex=True)
+        df.to_sql(name='table1', con=engine, if_exists="replace", index=False)   
+ 
+    elif n==2:
+        df = pd.read_csv(url, delimiter=';',skiprows=range(53, 58091), nrows=53,encoding='latin1')
+        df.to_sql(name='table2', con=engine, if_exists="replace", index=False)
 
-    df.to_sql(name='table1', con=engine, if_exists="replace", index=False)
-
-else:
-    print(f"Failed to fetch the CSV file. Status code: {response.status_code}")
-
-
-""""""""""""""""""""" CREATE DATABASE 2  """""""""""""""""
+    else: 
+        df = pd.read_csv(url, delimiter=';',skiprows=range(0, 3), nrows=35,encoding='latin1')
+        # Rename the "Unnamed: 0" column to None
+        df.rename(columns={"Unnamed: 0": "Years"}, inplace=True)
+        df.fillna("", inplace=True)
+        df.to_sql(name='table3', con=engine, if_exists="replace", index=False)
+            
+url1 = "https://www.datenportal.bmbf.de/portal/Tabelle-0.64.csv"
+clean_dataset(url1, 1)
 
 url2 = "https://www.bka.de/SharedDocs/Downloads/DE/Publikationen/PolizeilicheKriminalstatistik/2022/Land/Tatverdaechtige/LA-TV-03-T40-Laender-TV-deutsch_csv.csv?__blob=publicationFile&v=4"
+clean_dataset(url2, 2)
 
-db_path2 = os.path.join("C://Users//nahra//OneDrive//Desktop//Master//made-template//data","table2.sqlite")
-engine2 = create_engine(f"sqlite:///{db_path2}")
-meta2 = sa.MetaData()
-meta2.drop_all(bind=engine2)
-meta2.create_all(bind=engine2)        
-df = pd.read_csv(url2, delimiter=';',skiprows=range(53, 58091), nrows=53,encoding='latin1')
-df.to_sql(name='table2', con=engine2, if_exists="replace", index=False)
-
-
-
+url3 = "https://www-genesis.destatis.de/genesis/downloads/00/tables/13211-0009_00.csv"
+clean_dataset(url3, 3)
