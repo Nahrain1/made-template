@@ -11,7 +11,7 @@ Addressing the relationship between early school leaving and the unemployment ra
 
 ## **Data source 1: Unemployed: Federal states, years, gender**  
 Metadata URL: https://data.europa.eu/data/datasets?locale=de  
-Data URL: https://data.europa.eu/data/datasets/30303031-3332-4031-312d-303030390000?locale=de  
+Data URL: https://www-genesis.destatis.de/genesis/downloads/00/tables/13211-0009_00.csv  
 Data Type: CSV Data  
 Official statistics, sourced from a CSV file provided by the Statistisches Bundesamt, present data on unemployment figures categorized by federal states and gender within the period spanning from 1991 to 2022. 
 
@@ -29,7 +29,7 @@ Data Type: CSV Data
 These statistics, released by the Bundeskriminalamt IZ 35, describe the count of crime suspects in each federal state, categorized by age and gender, for the year 2022.  
 
 ## **Work Packages**  
-1. Datasource exploration to extract the data https://github.com/Nahrain1/made-template/issues/1  
+1. Datasource exploration https://github.com/Nahrain1/made-template/issues/1 
 2. Genration of Graphs https://github.com/Nahrain1/made-template/issues/2  
 3. Analyze the resulting data https://github.com/Nahrain1/made-template/issues/3  
 4. to come during the semester ... 
