@@ -23,7 +23,7 @@ def pipeline_for_dataset3():
     return clean_dataset(url=url, n=3)
 
 #store_path = r"C:\\Users\\nahra\\OneDrive\\Desktop\\Master\\made-template\\data"
-store_path = 'sqlite:///:memory:'
+store_path = sa.create_engine('sqlite:///:memory:')
 
 def test_check_df_instance (pipeline_for_dataset1, pipeline_for_dataset2, pipeline_for_dataset3):
     df1 = pipeline_for_dataset1
