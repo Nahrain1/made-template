@@ -44,8 +44,8 @@ def test_check_nulls (pipeline_for_dataset1, pipeline_for_dataset2, pipeline_for
 
 
 def test_table_existence():
-    database_path1 = os.path.join('sqlite:///:memory:', "table1.sqlite")
-    assert os.path.exists(database_path1)
+    #database_path1 = os.path.join('sqlite:///:memory:', "table1.sqlite")
+    #assert os.path.exists(database_path1)
     assert store_path.has_table('table1')
     database_path2 = os.path.join(store_path, "table2.sqlite")
     assert os.path.exists(database_path2)
