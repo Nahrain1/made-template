@@ -52,7 +52,7 @@ def test_table_existence():
     #database_path3 = os.path.join(store_path, "table3.sqlite")
     #assert os.path.exists(database_path3)
     engine = create_engine('sqlite:///:memory:')
-    metadata = MetaData(bind=engine)
+    #metadata = MetaData(bind=engine)
     assert engine.dialect.has_table(engine.connect(), 'table1')
     assert engine.dialect.has_table(engine.connect(), 'table2')
     assert engine.dialect.has_table(engine.connect(), 'table3')
