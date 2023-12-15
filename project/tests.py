@@ -4,7 +4,7 @@ import sqlalchemy as sa
 import pandas as pd
 from pipeline import clean_dataset
 import numpy as np
-
+from sqlalchemy import create_engine, MetaData
 
 
 @pytest.fixture
@@ -46,12 +46,16 @@ def test_check_nulls (pipeline_for_dataset1, pipeline_for_dataset2, pipeline_for
 def test_table_existence():
     #database_path1 = os.path.join('sqlite:///:memory:', "table1.sqlite")
     #assert os.path.exists(database_path1)
-    assert store_path.has_table('table1')
-    database_path2 = os.path.join(store_path, "table2.sqlite")
-    assert os.path.exists(database_path2)
-    database_path3 = os.path.join(store_path, "table3.sqlite")
-    assert os.path.exists(database_path3)
-    
+    #assert store_path.has_table('table1')
+    #database_path2 = os.path.join(store_path, "table2.sqlite")
+    #assert os.path.exists(database_path2)
+    #database_path3 = os.path.join(store_path, "table3.sqlite")
+    #assert os.path.exists(database_path3)
+    engine = create_engine('sqlite:///:memory:')
+    metadata = MetaData(bind=engine)
+    assert engine.dialect.has_table(engine.connect(), 'table1')
+    assert engine.dialect.has_table(engine.connect(), 'table2')
+    assert engine.dialect.has_table(engine.connect(), 'table3')
 
 
 def test_data_types_sample_col(pipeline_for_dataset1, pipeline_for_dataset2, pipeline_for_dataset3):
