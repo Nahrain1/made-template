@@ -5,10 +5,11 @@ import os
 import numpy as np 
 
 def clean_dataset(url, n):
+    database_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'mydata.db')
 
     #database_path = os.path.join("C:\\Users\\nahra\\OneDrive\\Desktop\\Master\\made-template\\data",f"table{n}.sqlite")
-    #engine = create_engine(f"sqlite:///{database_path}")
-    engine = sa.create_engine('sqlite:///:memory:')
+    engine = create_engine(f"sqlite:///{database_path}")
+    #engine = sa.create_engine('sqlite:///:memory:')
     meta = sa.MetaData()
     meta.drop_all(bind=engine)
     meta.create_all(bind=engine)
