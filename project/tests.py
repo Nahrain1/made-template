@@ -25,7 +25,6 @@ def pipeline_for_dataset3():
 
 #store_path = r"C:\\Users\\nahra\\OneDrive\\Desktop\\Master\\made-template\\data"
 #data_path = 'sqlite:///:memory:'
-data_path = os.path.join(os.path.dirname(__file__), '..', 'data')
 #data_path = "../data"
 def test_check_df_instance (pipeline_for_dataset1, pipeline_for_dataset2, pipeline_for_dataset3):
     df1 = pipeline_for_dataset1
@@ -46,6 +45,7 @@ def test_check_nulls (pipeline_for_dataset1, pipeline_for_dataset2, pipeline_for
 
 
 def test_table_existence():
+    data_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'mydata.db')
     connect = sqlite3.connect(data_path)
     cursor = connect.cursor()
     cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table';")
