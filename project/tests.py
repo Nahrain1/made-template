@@ -24,8 +24,8 @@ def pipeline_for_dataset3():
     return clean_dataset(url=url, n=3)
 
 #store_path = r"C:\\Users\\nahra\\OneDrive\\Desktop\\Master\\made-template\\data"
-store_path = sa.create_engine('sqlite:///:memory:')
-data_path = "../data"
+data_path = 'sqlite:///:memory:'
+#data_path = "../data"
 def test_check_df_instance (pipeline_for_dataset1, pipeline_for_dataset2, pipeline_for_dataset3):
     df1 = pipeline_for_dataset1
     df2 = pipeline_for_dataset2
@@ -50,11 +50,9 @@ def test_table_existence():
     cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table';")
     tables = cursor.fetchall()
     table_names = [table[0] for table in tables]
-
     assert "table1" in table_names
     assert "table2" in table_names
     assert "table3" in table_names
-
     connect.close()
 
 
