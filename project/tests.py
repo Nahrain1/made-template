@@ -23,9 +23,6 @@ def pipeline_for_dataset3():
     url = "https://www-genesis.destatis.de/genesis/downloads/00/tables/13211-0009_00.csv"
     return clean_dataset(url=url, n=3)
 
-#store_path = r"C:\\Users\\nahra\\OneDrive\\Desktop\\Master\\made-template\\data"
-#data_path = 'sqlite:///:memory:'
-#data_path = "../data"
 def test_check_df_instance (pipeline_for_dataset1, pipeline_for_dataset2, pipeline_for_dataset3):
     df1 = pipeline_for_dataset1
     df2 = pipeline_for_dataset2
