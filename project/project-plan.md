@@ -30,6 +30,8 @@ These statistics, released by the Bundeskriminalamt IZ 35, describe the count of
 
 ## **Work Packages**  
 1. Datasource exploration https://github.com/Nahrain1/made-template/issues/1 
-2. Genration of Graphs https://github.com/Nahrain1/made-template/issues/2  
-3. Analyze the resulting data https://github.com/Nahrain1/made-template/issues/3  
-4. to come during the semester ... 
+2. Build an Automated Data Pipeline https://github.com/Nahrain1/made-template/issues/4
+3. Add Automated Tests https://github.com/Nahrain1/made-template/issues/5
+4. Genration of Graphs https://github.com/Nahrain1/made-template/issues/2  
+5. Analyze the resulting data https://github.com/Nahrain1/made-template/issues/3  
+6. Report results https://github.com/Nahrain1/made-template/issues/6
