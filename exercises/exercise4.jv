@@ -1,0 +1,77 @@
+transform CelsiusToFahrenheit
+{
+  from tempCelsius oftype decimal;
+  to tempFahrenheit oftype decimal;
+
+  tempFahrenheit: (tempCelsius * 9/5) + 32;
+}
+
+pipeline DeviceDataPipeline{
+    block ZipExtractor oftype HttpExtractor{
+        url:"https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    }
+    block UnzipData oftype ArchiveInterpreter{
+        archiveType: "zip";
+    }
+    block CSVFilePicker oftype FilePicker {
+        path: "/data.csv";
+    }
+
+    block DataTextFileInterpreter oftype TextFileInterpreter{
+    }
+
+    block DataCSVInterpreter oftype CSVInterpreter{
+        delimiter: ';';
+    }
+
+    block ColumnDeleter oftype ColumnDeleter { 
+       delete: [column F, column G, column H, column I]; 
+    }
+
+    block ColumnSelector oftype CellRangeSelector {
+        select: range A1:K*;
+    }
+
+    block DataTableInterpreter oftype TableInterpreter{
+    header: false;
+    columns: [
+        "Geraet" oftype integer,
+        "Hersteller" oftype text,
+        "Model" oftype text,
+        "Monat" oftype integer,
+        "Temperatur" oftype decimal,
+        "Batterietemperatur" oftype decimal,
+        "Geraet aktiv" oftype text,
+    ];
+    }
+    block TempConverter oftype TableTransformer
+    {
+        inputColumns: ["Temperatur"];
+        outputColumn: 'Temperatur';
+        use: CelsiusToFahrenheit;
+    }
+
+    block TempBatteryConverter oftype TableTransformer 
+    {
+        inputColumns: ["Batterietemperatur"];
+        outputColumn: 'Batterietemperatur';
+        use: CelsiusToFahrenheit;
+    }
+
+    block DataLoader oftype SQLiteLoader 
+    { 
+        table: "temperatures"; 
+        file: "./temperatures.sqlite"; 
+    }
+    ZipExtractor
+    ->UnzipData
+    ->CSVFilePicker
+    ->DataTextFileInterpreter
+    ->DataCSVInterpreter
+    ->ColumnSelector
+    ->ColumnDeleter
+    ->DataTableInterpreter
+    ->TempConverter
+    ->TempBatteryConverter
+    ->DataLoader;
+    }
