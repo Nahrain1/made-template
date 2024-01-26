@@ -15,11 +15,9 @@ stops_cols = ["stop_id", "stop_name", "stop_lat", "stop_lon", "zone_id"]
 df = pd.read_csv("stops.txt", usecols=stops_cols)
 df = df[df['zone_id'] == 2001]
 
-
 df = df.dropna(subset=['stop_name', 'stop_lat', 'stop_lon'])
 df = df[(df['stop_lat'] >= -90) & (df['stop_lat'] <= 90)]
 df = df[(df['stop_lon'] >= -90) & (df['stop_lon'] <= 90)]
-
 
 engine = create_engine('sqlite:///gtfs.sqlite')
 df.to_sql('stops', engine, if_exists='replace', index=False)
