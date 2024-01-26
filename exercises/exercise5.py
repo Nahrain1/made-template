@@ -20,7 +20,6 @@ df = df.dropna(subset=['stop_name', 'stop_lat', 'stop_lon'])
 df = df[(df['stop_lat'] >= -90) & (df['stop_lat'] <= 90)]
 df = df[(df['stop_lon'] >= -90) & (df['stop_lon'] <= 90)]
 
-df = df.astype({'stop_id': 'TEXT', 'stop_name': 'TEXT', 'stop_lat': 'FLOAT', 'stop_lon': 'FLOAT', 'zone_id': 'BIGINT'})
 
 engine = create_engine('sqlite:///gtfs.sqlite')
 df.to_sql('stops', engine, if_exists='replace', index=False)
