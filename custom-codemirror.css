@@ -1,0 +1,50 @@
+/* Hintergrundfarbe und Standardtextfarbe */
+.CodeMirror {
+    background-color: #000000; /* Schwarzer Hintergrund */
+    color: #FFFFFF; /* Weißer Standardtext */
+    font-family: 'Source Code Pro', monospace;
+    font-size: 14px;
+}
+
+/* Kommentarfarben */
+.CodeMirror .cm-comment {
+    color: #808080; /* Grau für Kommentare */
+    font-style: italic;
+}
+
+/* Schlüsselwörter und Kontrollfluss */
+.CodeMirror .cm-keyword {
+    color: #0098CF; /* Blau für Schlüsselwörter */
+}
+
+/* Funktionen */
+.CodeMirror .cm-def {
+    color: #EC3479; /* Pink für Funktionsnamen */
+}
+
+/* Variablen und Parameter */
+.CodeMirror .cm-variable,
+.CodeMirror .cm-variable-2,
+.CodeMirror .cm-parameter {
+    color: #FFFFFF; /* Weiß für Variablen und Parameter */
+}
+
+/* Zahlen */
+.CodeMirror .cm-number {
+    color: #E43375; /* Rot für Zahlen */
+}
+
+/* Eingebaute Funktionen und Klassen */
+.CodeMirror .cm-builtin {
+    color: #F5922F; /* Orange für eingebaute Funktionen */
+}
+
+/* Zeichenketten */
+.CodeMirror .cm-string {
+    color: #00A37E; /* Grün für Zeichenketten */
+}
+
+/* Hintergrundfarbe für Notebook-Zellen (falls zutreffend) */
+.CodeMirror .notebook-cell {
+    background-color: #1F1F1F;
+}
